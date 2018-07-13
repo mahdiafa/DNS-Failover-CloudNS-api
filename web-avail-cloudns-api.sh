@@ -5,11 +5,11 @@
 
 # Check the availabilty of website by ICMP and HTTP(S) to deactive unreachable host. 
 
-time=`date '+%F %T'`
-logfile=/tmp/$0
+time=`$(date '+%F %T')
 dir=$(dirname $0)
-recordcheckurl=https://api.cloudns.net/dns/records.json
-changerecordurl=https://api.cloudns.net/dns/change-record-status.json
+logfile="$dir"/logs
+recordcheckurl="https://api.cloudns.net/dns/records.json"
+changerecordurl="https://api.cloudns.net/dns/change-record-status.json"
 authid="your-authid" # change it to your authid
 authpass="your-authpass" # change it to your authpass
 domain="domain-name" # change it to your domain name
