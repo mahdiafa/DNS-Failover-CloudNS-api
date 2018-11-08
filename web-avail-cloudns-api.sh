@@ -25,13 +25,13 @@ mkdir -p $dir/records
 rm -f $dir/records/* 
 
 # Get records and write it to the file with id number name
-for id in $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host$host&type=a" | jq -r .[].id); do echo $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host$host&type=a" | jq -r '."'$id'".record') > records/$id; done
+for id in $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host=$host&type=a" | jq -r .[].id); do echo $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host=$host&type=a" | jq -r '."'$id'".record') > records/$id; done
 
 # Get IP address of the record
-for id in $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host$host&type=a" | jq -r .[].id); do ip=$(cat $dir/records/$id | grep $1); done
+for id in $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host=$host&type=a" | jq -r .[].id); do ip=$(cat $dir/records/$id | grep $1); done
 
 # Find status of the record
-for id in $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host$host&type=a" | jq -r .[].id); do status=$(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host$host&type=a" | jq -r '."'$id'".status'); done
+for id in $(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host=$host&type=a" | jq -r .[].id); do status=$(curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host=$host&type=a" | jq -r '."'$id'".status'); done
 
 fping $1
 if [ $? -eq 0 ] # Ping hosts
@@ -47,7 +47,7 @@ else
 		exit 0
 	else
 		echo $time Web service on $1 is also down >> $logfile
-		curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host$host&type=a" | jq  '.[].record' | grep $1 # Get records of domain
+		curl -s $recordcheckurl -d "auth-id=$authid&auth-password=$authpass&domain-name=$domain&host=$host&type=a" | jq  '.[].record' | grep $1 # Get records of domain
 		if [ $? -eq 1 ]
 		then
         		echo $time record for IP $1 is unavailable >> $logfile
