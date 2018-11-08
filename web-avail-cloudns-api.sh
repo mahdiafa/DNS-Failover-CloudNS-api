@@ -3,7 +3,10 @@
 # Written by: Mahdi Afazeli
 # Modify by: Mahdi Afazeli 2018-05-25
 
-# Check the availabilty of website by ICMP and HTTP(S) to deactive unreachable host. 
+# Check the availabilty of website by ICMP and HTTP(S) to deactive unreachable host.
+# This script check the A record that you entered in $3 argument to make sure your server with IP address ($1) is up and reachable.
+# also you can leave $3 alone if you have to check A records of yur domain without any subdomain name 
+# the server that you want to monitor must be pingable from where you run this script
 
 time=$(date '+%F %T')
 dir=$(dirname $0)
@@ -12,8 +15,8 @@ recordcheckurl="https://api.cloudns.net/dns/records.json"
 changerecordurl="https://api.cloudns.net/dns/change-record-status.json"
 authid="your-authid" # change it to your authid
 authpass="your-authpass" # change it to your authpass
-host="$2" # second argument
-domain="$3" # third argument
+host="$3" # second argument
+domain="$2" # third argument
 web="443"
 maillist="your-admin@domain.com"
 
