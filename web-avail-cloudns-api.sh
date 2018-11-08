@@ -20,6 +20,7 @@ domain="$2" # third argument
 web="443"
 maillist="your-admin@domain.com"
 
+mkdir -p $dir/records
 # Remove old records
 rm -f $dir/records/* 
 
