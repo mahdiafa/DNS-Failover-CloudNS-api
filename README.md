@@ -1,4 +1,3 @@
-Check the availabilty of website by ICMP and HTTP(S) to deactive unreachable record.
-This script check the A record that you entered in $3 argument to make sure your server with IP address ($1) is up and reachable.
-also you can leave $3 alone if you have to check A records of your domain without any subdomain name
-the server that you want to monitor must be pingable from where you run this script
+The script checks the availability of website by ICMP & HTTP(S), if ICMP result shows that the website is unreachable, then the script will check the availability of website by HTTP(S) port request. If both show that the website is down then “A record” will be deactivated on CloudNS by the script.
+So that there are 3 arguments in use, $1 is the website IP address, $2 is the domain name (sample.com) and finally $3 is the “A record” (www). However it is also an option to do not use “$3” (A record), it is up to you.  
+Keep in mind that website must be pingable from the source where is executing the script.
